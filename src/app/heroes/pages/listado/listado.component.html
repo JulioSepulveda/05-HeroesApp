@@ -1,0 +1,24 @@
+<h1>Listado de Héroes</h1>
+<mat-divider></mat-divider>
+<br>
+
+<!-- El div principal es para que todas las tarjetas estén en columnas 
+     se puede definir un fxLayout por defecto y después indicar por ejemplo el comportamiento cuando la pantalla es muy pequeña con xs
+     fxLayoutAlign hacemos que los hijos de este div estén centrados
+     fxLayoutGap hacemos que los hijos de este div tengan una separación vertical de 20 px-->
+<div fxLayout="row wrap"
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="20px">
+    <!-- Se puede especificar un comportamiento por defecto con fxFlex y diferentes comportamientos cuando es grande la pantalla (lg) o pequeña (sm) por ejemplo
+         En el segundo div le estamos diciendo que cada tarjeta tiene el 30%  de la linea -->
+    <div fxFlex="20" 
+         fxFlex.lg="15"
+         fxFlex.sm="30"
+         *ngFor="let heroe of heroes">
+
+        <app-heroe-tarjeta [heroe] = heroe></app-heroe-tarjeta>
+
+    </div>   
+</div>
+

@@ -1,0 +1,54 @@
+<!-- Las etiquetas que comienzan por mat pertenecen a Angular Material -->
+<mat-sidenav-container fullscreen>
+    <!-- El nombre después de la almohadilla es para poder ser llamado ese elemento desde otro del propio html (como hacemos en el 
+         evento click del boton) 
+         El push es para que cuando se pulse el botón y aparezca el sidenav, arrastre el botón para que no se oculte -->
+    <mat-sidenav #sidenav mode="push">
+        
+        <mat-toolbar color="primary">
+            <span>Menú</span>
+
+            <!-- spacer es una clase que hemos creado en el styles.css para que ponga todo a la derecha -->
+            <span class="spacer"></span>
+            
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <a routerLink="./listado" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Listado de Héroes</span>
+            </a>
+
+            <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>add</mat-icon>
+                <span>Añadir Héroe</span>
+            </a>
+
+            <a routerLink="./buscar" mat-list-item (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>search</mat-icon>
+                <span>Buscar Héroe</span>
+            </a>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span class="spacer"></span>
+
+        <button mat-button>Logout</button>
+    </mat-toolbar>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+
+    
+    
+</mat-sidenav-container>

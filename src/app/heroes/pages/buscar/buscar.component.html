@@ -1,0 +1,47 @@
+<!-- Para poder usar el Autocomplete de material a parte de importar ese módulo tambien tenemos que importar los modulos MatFormFieldModule y MatInputModule ya que también
+     se usan pero en la documentación no lo indica -->
+
+<div fxLayout="column">
+    <div>
+        <h1>Buscador de Héroes</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div fxLayout="column">
+        <h3>Buscador</h3>
+
+        <mat-form-field>
+            <input type="text"
+                   placeholder="Pick one"
+                   aria-label="Number"
+                   matInput
+                   [(ngModel)]="termino"
+                   [matAutocomplete]="auto"
+                   (input)="buscando()">
+            
+            <mat-autocomplete autoActiveFirstOption 
+                              #auto="matAutocomplete"
+                              (optionSelected)="opcionSeleccionada( $event )">
+                <mat-option *ngFor="let heroe of heroes" [value]="heroe" >
+                    {{ heroe.superhero }}   
+                </mat-option>
+
+                <mat-option value="" *ngIf="heroes.length === 0 && termino.trim().length > 0" >
+                    No hay resultados para {{ termino }}
+                </mat-option>
+            </mat-autocomplete>
+
+            <ng-template #sinResultados>
+                <mat-option>
+                    No existen resultados para esa busqueda
+                </mat-option>
+            </ng-template>
+            
+
+        </mat-form-field>
+    </div>
+
+    <div>
+        <pre>{{ heroeSeleccionado | json }}</pre>
+    </div>
+</div>
+
