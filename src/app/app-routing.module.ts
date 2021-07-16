@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
-import { HeroesModule } from './heroes/heroes.module';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 /* En este módulo solo declaramos las rutas principales */
 const routes: Routes = [
@@ -11,9 +11,13 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )
   },
+  /* Los métodos canLoad y canActivate pertenecen al guard creado en el módulo auth. Evita que pueda entrar o cargar los módulos de esta ruta sin estár logado. 
+     En el caso que intente acceder se queda en blanco */
   {
     path: 'heroes',
-    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule )
+    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule ),
+    canLoad: [ AuthGuard ],
+    canActivate: [ AuthGuard ]
   },
   {
     path: '404',
